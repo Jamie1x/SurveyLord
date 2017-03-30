@@ -33,42 +33,6 @@ router.get('/', (req, res, next) => {
    });
 });
 
-/* GET about page. */
-router.get('/about', (req, res, next) => {
-  res.render('content/about', {
-    title: 'About',
-    surveys: '',
-    displayName: req.user ? req.user.displayName : ''
-   });
-});
-
-/* GET projects page. */
-router.get('/projects', (req, res, next) => {
-  res.render('content/projects', {
-    title: 'Projects',
-    surveys: '',
-    displayName: req.user ? req.user.displayName : ''
-   });
-});
-
-/* GET services page. */
-router.get('/services', (req, res, next) => {
-  res.render('content/services', {
-    title: 'Services',
-    surveys: '',
-    displayName: req.user ? req.user.displayName : ''
-   });
-});
-
-/* GET contact page. */
-router.get('/contact', (req, res, next) => {
-  res.render('content/contact', {
-    title: 'Contact',
-    surveys: '',
-    displayName: req.user ? req.user.displayName : ''
-   });
-});
-
 // GET /login - render the login view
 router.get('/login', (req, res, next)=>{
   // check to see if the user is not already logged in
