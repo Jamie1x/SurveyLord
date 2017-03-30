@@ -33,13 +33,13 @@
         <% } %>
         <% if(title == "Home") { %>
             <li class="active"><a href="/">Home</a></li>
-            <li><a href="/connections"> Connections</a></li>
-        <% } else if(title == "Connections") {%>
+            <li><a href="/surveys"> Surveys</a></li>
+        <% } else if(title == "Surveys") {%>
             <li><a href="/">Home</a></li>
-            <li class="active"><a href="/connections"> Connections</a></li>
+            <li class="active"><a href="/surveys"> Surveys</a></li>
         <% } else {%>
             <li><a href="/">Home</a></li>
-            <li><a href="/connections"> Connections</a></li>
+            <li><a href="/surveys"> Surveys</a></li>
         <% }%>
         <% if(typeof displayName == 'string' && displayName) { %>
           <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>

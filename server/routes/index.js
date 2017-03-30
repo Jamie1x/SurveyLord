@@ -13,7 +13,7 @@ let UserModel = require('../models/users');
 let User = UserModel.User; // alias for User Model - User object
 
 // define the game model
-let connection = require('../models/connections');
+let survey = require('../models/surveys');
 
 // create a function to check if the user is authenticated
 function requireAuth(req, res, next) {
@@ -28,7 +28,7 @@ function requireAuth(req, res, next) {
 router.get('/', (req, res, next) => {
   res.render('content/index', {
     title: 'Home',
-    connections: '',
+    surveys: '',
     displayName: req.user ? req.user.displayName : ''
    });
 });
@@ -37,7 +37,7 @@ router.get('/', (req, res, next) => {
 router.get('/about', (req, res, next) => {
   res.render('content/about', {
     title: 'About',
-    connections: '',
+    surveys: '',
     displayName: req.user ? req.user.displayName : ''
    });
 });
@@ -46,7 +46,7 @@ router.get('/about', (req, res, next) => {
 router.get('/projects', (req, res, next) => {
   res.render('content/projects', {
     title: 'Projects',
-    connections: '',
+    surveys: '',
     displayName: req.user ? req.user.displayName : ''
    });
 });
@@ -55,7 +55,7 @@ router.get('/projects', (req, res, next) => {
 router.get('/services', (req, res, next) => {
   res.render('content/services', {
     title: 'Services',
-    connections: '',
+    surveys: '',
     displayName: req.user ? req.user.displayName : ''
    });
 });
@@ -64,7 +64,7 @@ router.get('/services', (req, res, next) => {
 router.get('/contact', (req, res, next) => {
   res.render('content/contact', {
     title: 'Contact',
-    connections: '',
+    surveys: '',
     displayName: req.user ? req.user.displayName : ''
    });
 });
@@ -76,19 +76,19 @@ router.get('/login', (req, res, next)=>{
     // render the login page
     res.render('auth/login', {
       title: "Login",
-      connections: '',
+      surveys: '',
       messages: req.flash('loginMessage'),
       displayName: req.user ? req.user.displayName : ''
     });
     return;
   } else {
-    return res.redirect('/connections'); // redirect to connections list
+    return res.redirect('/surveys'); // redirect to surveys list
   }
 });
 
 // POST /login - process the login attempt
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/connections',
+  successRedirect: '/surveys',
   failureRedirect: '/login',
   failureFlash: 'bad login'
 }));
@@ -100,13 +100,13 @@ router.get('/register', (req, res, next)=>{
     // render the registration page
       res.render('auth/register', {
       title: "Register",
-      connections: '',
+      surveys: '',
       messages: req.flash('registerMessage'),
       displayName: req.user ? req.user.displayName : ''
     });
     return;
   } else {
-    return res.redirect('/connections'); // redirect to connections list
+    return res.redirect('/surveys'); // redirect to surveys list
   }
 });
 
@@ -127,14 +127,14 @@ router.post('/register', (req, res, next)=>{
         }
         return res.render('auth/register', {
           title: "Register",
-          connections: '',
+          surveys: '',
           messages: req.flash('registerMessage'),
           displayName: req.user ? req.user.displayName : ''
         });
       }
       // if registration is successful
       return passport.authenticate('local')(req, res, ()=>{
-        res.redirect('/connections');
+        res.redirect('/surveys');
       });
     });
 });

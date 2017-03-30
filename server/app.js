@@ -32,7 +32,7 @@ db.once('open', () => {
 
 // define routers
 let index = require('./routes/index'); // top level routes
-let connections = require('./routes/connections'); // routes for connections
+let surveys = require('./routes/surveys'); // routes for surveys
 
 let app = express();
 
@@ -62,7 +62,7 @@ app.use(passport.session());
 
 // route redirects
 app.use('/', index);
-app.use('/connections', connections);
+app.use('/surveys', surveys);
 
 // Passport User Configuration
 let UserModel = require('./models/users');

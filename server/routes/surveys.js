@@ -1,4 +1,4 @@
-//connections.js
+//surveys.js
 //Jamie Kennedy - 300753196
 //COMP308-W2017-Assignment2
 
@@ -12,8 +12,8 @@ let passport = require('passport');
 let UserModel = require('../models/users');
 let User = UserModel.User; // alias for User Model - User object
 
-// define the connection model
-let connection = require('../models/connections');
+// define the survey model
+let survey = require('../models/surveys');
 
 // create a function to check if the user is authenticated
 function requireAuth(req, res, next) {
@@ -24,66 +24,66 @@ function requireAuth(req, res, next) {
   next();
 }
 
-/* GET connections List page. READ */
+/* GET surveys List page. READ */
 router.get('/', requireAuth, (req, res, next) => {
-  // find all connections in the connections collection
-  connection.find((err, connections) => {
+  // find all surveys in the surveys collection
+  survey.find((err, surveys) => {
     if (err) {
       return console.error(err);
     }
     else {
-      res.render('connections/index', {
-        title: 'Connections',
-        connections: connections,
+      res.render('surveys/index', {
+        title: 'Surveys',
+        surveys: surveys,
         displayName: req.user.displayName
       });
     }
   });
 });
 
-//  GET the Connection Details page in order to add a new Connection
+//  GET the Survey Details page in order to add a new Survey
 router.get('/add', requireAuth, (req, res, next) => {
-  res.render('connections/details', {
-    title: "Add a new connection",
-    connections: '',
+  res.render('surveys/details', {
+    title: "Add a new survey",
+    surveys: '',
     displayName: req.user.displayName
   });
 });
 
-// POST process the Connection Details page and create a new Connection - CREATE
+// POST process the Survey Details page and create a new Survey - CREATE
 router.post('/add', requireAuth, (req, res, next) => {
-  let newConnection = connection({
+  let newSurvey = survey({
     "Title": req.body.title,
     "Number": req.body.number,
     "Email": req.body.email
   });
 
-  connection.create(newConnection, (err, connection) => {
+  survey.create(newSurvey, (err, survey) => {
     if (err) {
       console.log(err);
       res.end(err);
     } else {
-      res.redirect('/connections');
+      res.redirect('/surveys');
     }
   });
 });
 
-// GET the Connection Details page in order to edit an existing Connection
+// GET the Survey Details page in order to edit an existing Survey
 router.get('/:id', requireAuth, (req, res, next) => {
   try {
     // get a reference to the id from the url
     let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
 
     // find one game by its id
-    connection.findById(id, (err, connections) => {
+    survey.findById(id, (err, surveys) => {
       if (err) {
         console.log(err);
         res.end(error);
       } else {
-        // show the connection details view
-        res.render('connections/details', {
-          title: 'Connection Details',
-          connections: connections,
+        // show the survey details view
+        res.render('surveys/details', {
+          title: 'Survey Details',
+          surveys: surveys,
           displayName: req.user.displayName
         });
       }
@@ -99,20 +99,20 @@ router.post('/:id', requireAuth, (req, res, next) => {
   // get a reference to the id from the url
   let id = req.params.id;
 
-  let updatedConnection = connection({
+  let updatedSurvey = survey({
     "_id": id,
     "Title": req.body.title,
     "Number": req.body.number,
     "Email": req.body.email
   });
 
-  connection.update({ _id: id }, updatedConnection, (err) => {
+  survey.update({ _id: id }, updatedSurvey, (err) => {
     if (err) {
       console.log(err);
       res.end(err);
     } else {
       // refresh the game List
-      res.redirect('/connections');
+      res.redirect('/surveys');
     }
   });
 });
@@ -122,13 +122,13 @@ router.get('/delete/:id', requireAuth, (req, res, next) => {
   // get a reference to the id from the url
   let id = req.params.id;
 
-  connection.remove({ _id: id }, (err) => {
+  survey.remove({ _id: id }, (err) => {
     if (err) {
       console.log(err);
       res.end(err);
     } else {
-      // refresh the connections list
-      res.redirect('/connections');
+      // refresh the surveys list
+      res.redirect('/surveys');
     }
   });
 });
