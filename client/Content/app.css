@@ -1,9 +1,11 @@
 body {
-  background-image: url("../Assets/images/bg.jpg");
+  font-family: 'Orbitron', sans-serif;
+  background-color: #ffffff;
 }
 
 .container {
-  background-color:#ffffff
+  width: 100%;
+  background-color:#cccccc;
 }
 
 .navbar-default {

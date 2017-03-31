@@ -1,5 +1,5 @@
 module.exports = {
   //local MongoDB deployment ->
   "URI": "mongodb://localhost/surveys308"
-  //Remote MongoDB deployment -> let URI = "mongodb://thomas:123456@ds161059.mlab.com:61059/surveys308";
+  //Remote MongoDB deployment -> let URI = "mongodb://Jamie1x:password@ds060649.mlab.com:60649/surveylord";
 };

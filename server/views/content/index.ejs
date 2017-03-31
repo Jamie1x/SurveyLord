@@ -4,11 +4,19 @@
       <div class="row">
       <br/>
       <h1> Ask Questions, Get Answers </h1>
-      <br/><br/><br/><br/>
-        <h3> Create a free account to get started with your surveys </h3>
-        <br/><br/>
-        <p><img src="../Assets/images/chucknorris.gif" width="387" height="251" alt="norris" /></p>
-        <br/><br/><br/><br/>
+      <br/><br/>
+      <% if(typeof displayName == 'string' && displayName) { %>
+      <a href="/surveys">
+        <input type="button" class="btn btn-info btn-lg" value="Create Survey"/>
+      </a>
+      <% } else { %>
+      <a href="/register">
+        <input type="button" class="btn btn-info btn-lg" value="Sign Up"/>
+      </a>
+      <% } %>
+      <br/><br/>
+        <h3> Create a free account to get started making surveys </h3>
+      <br/><br/>
       </div>
     </div>
 <% include ../partials/footer.ejs %>
