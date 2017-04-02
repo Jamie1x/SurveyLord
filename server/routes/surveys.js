@@ -1,6 +1,6 @@
 //surveys.js
 //Jamie Kennedy - 300753196
-//COMP308-W2017-Assignment2
+//COMP308-W2017-Final
 
 // modules required for routing
 let express = require('express');
@@ -25,7 +25,7 @@ function requireAuth(req, res, next) {
 }
 
 /* GET surveys List page. READ */
-router.get('/', requireAuth, (req, res, next) => {
+router.get('/', (req, res, next) => {
   // find all surveys in the surveys collection
   survey.find((err, surveys) => {
     if (err) {
@@ -35,7 +35,7 @@ router.get('/', requireAuth, (req, res, next) => {
       res.render('surveys/index', {
         title: 'Surveys',
         surveys: surveys,
-        displayName: req.user.displayName
+        displayName: req.user ? req.user.displayName : ''
       });
     }
   });
@@ -54,8 +54,8 @@ router.get('/add', requireAuth, (req, res, next) => {
 router.post('/add', requireAuth, (req, res, next) => {
   let newSurvey = survey({
     "Title": req.body.title,
-    "Number": req.body.number,
-    "Email": req.body.email
+    "Owner": req.user.displayName,
+    "Question": req.body.question
   });
 
   survey.create(newSurvey, (err, survey) => {
@@ -69,7 +69,7 @@ router.post('/add', requireAuth, (req, res, next) => {
 });
 
 // GET the Survey Details page in order to edit an existing Survey
-router.get('/:id', requireAuth, (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   try {
     // get a reference to the id from the url
     let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
@@ -84,7 +84,7 @@ router.get('/:id', requireAuth, (req, res, next) => {
         res.render('surveys/details', {
           title: 'Survey Details',
           surveys: surveys,
-          displayName: req.user.displayName
+          displayName: req.user ? req.user.displayName : ''
         });
       }
     });
@@ -102,8 +102,8 @@ router.post('/:id', requireAuth, (req, res, next) => {
   let updatedSurvey = survey({
     "_id": id,
     "Title": req.body.title,
-    "Number": req.body.number,
-    "Email": req.body.email
+    "Owner": req.user.displayName,
+    "Question": req.body.question
   });
 
   survey.update({ _id: id }, updatedSurvey, (err) => {

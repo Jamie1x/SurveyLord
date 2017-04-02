@@ -6,16 +6,18 @@
       <h1> Ask Questions, Get Answers </h1>
       <br/><br/>
       <% if(typeof displayName == 'string' && displayName) { %>
-      <a href="/surveys">
+      <a href="/surveys/add">
         <input type="button" class="btn btn-info btn-lg" value="Create Survey"/>
       </a>
+      <br/><br/>
+        <h3> Begin asking the question you want to ask </h3>
       <% } else { %>
       <a href="/register">
         <input type="button" class="btn btn-info btn-lg" value="Sign Up"/>
       </a>
-      <% } %>
       <br/><br/>
         <h3> Create a free account to get started making surveys </h3>
+      <% } %>
       <br/><br/>
       </div>
     </div>

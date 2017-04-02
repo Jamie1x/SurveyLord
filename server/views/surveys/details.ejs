@@ -12,14 +12,9 @@
                 placeholder="Contact Name" name="title" value="<%= surveys.Title %>" required>
               </div>
               <div class="form-group">
-                <label for="NumberTextField">Number</label>
-                <input type="tel" pattern="\d{3}[\-]\d{3}[\-]\d{4}" title='999-999-9999' class="form-control" id="NumberTextField"
-                placeholder="Phone Number" name="number" value="<%= surveys.Number %>"  required>
-              </div>
-              <div class="form-group">
-                <label for="EmailTextField">Email</label>
-                <input type="email" class="form-control" id="EmailTextField"
-                placeholder="Email Address" name="email" value="<%= surveys.Email %>"  required>
+                <label for="QuestionTextField">Question</label>
+                <input type="text" class="form-control" id="QuestionTextField"
+                placeholder="First Question" name="question" value="<%= surveys.Question %>"  required>
               </div>
 
               <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Submit</button>

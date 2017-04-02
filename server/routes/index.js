@@ -1,6 +1,6 @@
 //index.js
 //Jamie Kennedy - 300753196
-//COMP308-W2017-Assignment2
+//COMP308-W2017-Final
 
 // modules required for routing
 let express = require('express');
