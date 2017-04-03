@@ -35,7 +35,8 @@ router.get('/', (req, res, next) => {
       res.render('surveys/index', {
         title: 'Surveys',
         surveys: surveys,
-        displayName: req.user ? req.user.displayName : ''
+        displayName: req.user ? req.user.displayName : '',
+        username: req.user ? req.user.username : ''
       });
     }
   });
@@ -54,7 +55,7 @@ router.get('/add', requireAuth, (req, res, next) => {
 router.post('/add', requireAuth, (req, res, next) => {
   let newSurvey = survey({
     "Title": req.body.title,
-    "Owner": req.user.displayName,
+    "Owner": req.user.username,
     "Question": req.body.question
   });
 
@@ -94,6 +95,32 @@ router.get('/:id', (req, res, next) => {
   }
 });
 
+// GET the Survey Details page in order to edit an existing Survey
+router.get('/answer/:id', (req, res, next) => {
+  try {
+    // get a reference to the id from the url
+    let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
+
+    // find one game by its id
+    survey.findById(id, (err, surveys) => {
+      if (err) {
+        console.log(err);
+        res.end(error);
+      } else {
+        // show the survey details view
+        res.render('surveys/answer', {
+          title: 'Survey',
+          surveys: surveys,
+          displayName: req.user ? req.user.displayName : ''
+        });
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    res.redirect('/errors/404');
+  }
+});
+
 // POST - process the information passed from the details form and update the document
 router.post('/:id', requireAuth, (req, res, next) => {
   // get a reference to the id from the url
@@ -102,7 +129,7 @@ router.post('/:id', requireAuth, (req, res, next) => {
   let updatedSurvey = survey({
     "_id": id,
     "Title": req.body.title,
-    "Owner": req.user.displayName,
+    "Owner": req.user.username,
     "Question": req.body.question
   });
 

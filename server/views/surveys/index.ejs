@@ -17,6 +17,7 @@
                   <th class="text-center">Owner</th>
                   <th class="text-center"></th>
                   <th class="text-center"></th>
+                  <th class="text-center"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -27,12 +28,17 @@
                   <td class="text-center"><%= surveys[count].Owner %></td>
 
                   <td class="text-center">
-                  <a href="/surveys/<%= surveys[count]._id %>" class="btn btn-primary">
+                  <% if(surveys[count].Owner == username) { %>
+                  <a href="/surveys/<%= surveys[count]._id %>" class="btn btn-info">
+                  <i class="fa fa-pencil-square-o"></i> Edit</a>
+                  <% } else { %>
+                  <a href="/surveys/answer/<%= surveys[count]._id %>" class="btn btn-primary">
                   <i class="fa fa-pencil-square-o"></i> Open</a>
+                  <% } %>
                   </td>
 
                   <td class="text-center">
-                  <% if(surveys[count].Owner == displayName) { %>
+                  <% if(surveys[count].Owner == username) { %>
                   <a href="/surveys/delete/<%= surveys[count]._id %>" class="btn btn-danger">
                   <i class="fa fa-trash-o"></i> Delete</a>
                   <% } %>

@@ -4,17 +4,12 @@
     <div class="container">
       <div class="row">
         <div class="col-md-offset-3 col-md-6">
-          <h1><%= title %></h1>
+          <h1><%= surveys.Title %></h1>
             <form class="form" method="post">
               <div class="form-group">
-                <label for="NameTextField">Title</label>
-                <input type="text" class="form-control" id="NameTextField"
-                placeholder="Survey Title" name="title" value="<%= surveys.Title %>" required>
-              </div>
-              <div class="form-group">
-                <label for="QuestionTextField">Question</label>
-                <input type="text" class="form-control" id="QuestionTextField"
-                placeholder="Question" name="question" value="<%= surveys.Question %>"  required>
+                <label><%= surveys.Question %></label>
+                <input type="text" class="form-control" id="AnswerTextField"
+                placeholder="Answer" name="answer" value="<%= surveys.Answer %>"  required>
               </div>
 
               <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Submit</button>
