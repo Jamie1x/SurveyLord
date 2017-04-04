@@ -95,6 +95,29 @@ router.get('/:id', (req, res, next) => {
   }
 });
 
+// POST - process the information passed from the details form and update the document
+router.post('/:id', requireAuth, (req, res, next) => {
+  // get a reference to the id from the url
+  let id = req.params.id;
+
+  let updatedSurvey = survey({
+    "_id": id,
+    "Title": req.body.title,
+    "Owner": req.user.username,
+    "Question": req.body.question
+  });
+
+  survey.update({ _id: id }, updatedSurvey, (err) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      // refresh the game List
+      res.redirect('/surveys');
+    }
+  });
+});
+
 // GET the Survey Details page in order to edit an existing Survey
 router.get('/answer/:id', (req, res, next) => {
   try {
@@ -119,29 +142,6 @@ router.get('/answer/:id', (req, res, next) => {
     console.log(err);
     res.redirect('/errors/404');
   }
-});
-
-// POST - process the information passed from the details form and update the document
-router.post('/:id', requireAuth, (req, res, next) => {
-  // get a reference to the id from the url
-  let id = req.params.id;
-
-  let updatedSurvey = survey({
-    "_id": id,
-    "Title": req.body.title,
-    "Owner": req.user.username,
-    "Question": req.body.question
-  });
-
-  survey.update({ _id: id }, updatedSurvey, (err) => {
-    if (err) {
-      console.log(err);
-      res.end(err);
-    } else {
-      // refresh the game List
-      res.redirect('/surveys');
-    }
-  });
 });
 
 // GET - process the delete by user id

@@ -1,0 +1,27 @@
+<% include ../partials/header.ejs %>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <h1><%= username %></h1>
+            <form class="form" method="post">
+              <div class="form-group">
+                <label>Display Name: <%= displayName %></label>
+              </div>
+              <div class="form-group">
+                <label>E-mail: <%= email %></label>
+              </div>
+              <div>
+              <a href="/profile/edit" class="btn btn-primary">
+              <i class="fa fa-pencil-square-o"></i> Edit Profile</a>
+              <a href="/logout" class="btn btn-warning">
+              <i class="fa fa-sign-out"></i> Logout</a>
+              </div>
+              <br/><br/><br/>
+            </form>
+        </div>
+      </div>
+    </div>
+
+<% include ../partials/footer.ejs %>

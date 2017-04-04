@@ -18,7 +18,7 @@ let survey = require('../models/surveys');
 // create a function to check if the user is authenticated
 function requireAuth(req, res, next) {
   // check if the user is logged in
-  if(!req.isAuthenticated()) {
+  if (!req.isAuthenticated()) {
     return res.redirect('/login');
   }
   next();
@@ -30,13 +30,13 @@ router.get('/', (req, res, next) => {
     title: 'Home',
     surveys: '',
     displayName: req.user ? req.user.displayName : ''
-   });
+  });
 });
 
 // GET /login - render the login view
-router.get('/login', (req, res, next)=>{
+router.get('/login', (req, res, next) => {
   // check to see if the user is not already logged in
-  if(!req.user) {
+  if (!req.user) {
     // render the login page
     res.render('auth/login', {
       title: "Login",
@@ -58,11 +58,11 @@ router.post('/login', passport.authenticate('local', {
 }));
 
 // GET /register - render the registration view
-router.get('/register', (req, res, next)=>{
-   // check to see if the user is not already logged in
-  if(!req.user) {
+router.get('/register', (req, res, next) => {
+  // check to see if the user is not already logged in
+  if (!req.user) {
     // render the registration page
-      res.render('auth/register', {
+    res.render('auth/register', {
       title: "Register",
       surveys: '',
       messages: req.flash('registerMessage'),
@@ -75,7 +75,7 @@ router.get('/register', (req, res, next)=>{
 });
 
 // POST / register - process the registration submission
-router.post('/register', (req, res, next)=>{
+router.post('/register', (req, res, next) => {
   User.register(
     new User({
       username: req.body.username,
@@ -84,9 +84,9 @@ router.post('/register', (req, res, next)=>{
     }),
     req.body.password,
     (err) => {
-      if(err) {
+      if (err) {
         console.log('Error inserting new user');
-        if(err.name == "UserExistsError") {
+        if (err.name == "UserExistsError") {
           req.flash('registerMessage', 'Registration Error: User Already Exists');
         }
         return res.render('auth/register', {
@@ -97,14 +97,59 @@ router.post('/register', (req, res, next)=>{
         });
       }
       // if registration is successful
-      return passport.authenticate('local')(req, res, ()=>{
+      return passport.authenticate('local')(req, res, () => {
         res.redirect('/surveys');
       });
     });
 });
 
+//GET /profile - render the user profile view
+router.get('/profile', requireAuth, (req, res, next) => {
+  // show the survey details view
+  res.render('content/profile', {
+    title: 'Profile',
+    surveys: '',
+    displayName: req.user ? req.user.displayName : '',
+    username: req.user ? req.user.username : '',
+    email: req.user.email
+  });
+});
+
+router.get('/profile/edit', requireAuth, (req, res, next) => {
+  // show the survey details view
+  res.render('content/editProfile', {
+    title: 'Edit Profile',
+    surveys: '',
+    displayName: req.user ? req.user.displayName : '',
+    username: req.user ? req.user.username : '',
+    email: req.user ? req.user.email : ''
+  });
+});
+
+//POST / profile/edit - update user information
+router.post('/profile/edit', requireAuth, (req, res, next) => {
+  let id = req.params.id;
+  let username = req.params.username;
+
+  let updatedUser = new User({
+    "_id": id,
+    "username": username,
+    "email": req.body.email,
+    "displayName": req.body.displayName
+  });
+  User.update({_id: id}, updatedUser, (err) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      // return to profile
+      res.redirect('/profile');
+    }
+  });
+});
+
 // GET /logout - process the logout request
-router.get('/logout', (req, res, next)=>{
+router.get('/logout', (req, res, next) => {
   req.logout();
   res.redirect('/'); // redirect to the home page
 });
