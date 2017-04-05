@@ -56,7 +56,7 @@ router.post('/add', requireAuth, (req, res, next) => {
   let newSurvey = survey({
     "Title": req.body.title,
     "Owner": req.user.username,
-    "Question": req.body.question
+    "Questions": req.body.question
   });
 
   survey.create(newSurvey, (err, survey) => {
@@ -70,7 +70,7 @@ router.post('/add', requireAuth, (req, res, next) => {
 });
 
 // GET the Survey Details page in order to edit an existing Survey
-router.get('/:id', (req, res, next) => {
+router.get('/edit/:id', (req, res, next) => {
   try {
     // get a reference to the id from the url
     let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
@@ -96,7 +96,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 // POST - process the information passed from the details form and update the document
-router.post('/:id', requireAuth, (req, res, next) => {
+router.post('/edit/:id', requireAuth, (req, res, next) => {
   // get a reference to the id from the url
   let id = req.params.id;
 
@@ -104,7 +104,7 @@ router.post('/:id', requireAuth, (req, res, next) => {
     "_id": id,
     "Title": req.body.title,
     "Owner": req.user.username,
-    "Question": req.body.question
+    "Questions": req.body.question
   });
 
   survey.update({ _id: id }, updatedSurvey, (err) => {
@@ -118,8 +118,8 @@ router.post('/:id', requireAuth, (req, res, next) => {
   });
 });
 
-// GET the Survey Details page in order to edit an existing Survey
-router.get('/answer/:id', (req, res, next) => {
+// GET the Survey Answer page in order to answer an existing Survey
+router.get('/:id', (req, res, next) => {
   try {
     // get a reference to the id from the url
     let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);

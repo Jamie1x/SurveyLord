@@ -6,17 +6,15 @@
         <div class="col-md-offset-3 col-md-6">
           <h1><%= title %></h1>
             <form class="form" method="post">
-              <div class="form-group">
-                <label for="NameTextField">Title</label>
-                <input type="text" class="form-control" id="NameTextField"
-                placeholder="Survey Title" name="title" value="<%= surveys.Title %>" required>
+              <div id="form-input">
+                <div class="form-group">
+                  <label for="NameTextField">Title</label>
+                  <input type="text" class="form-control" id="NameTextField"
+                  placeholder="Survey Title" name="title" value="<%= surveys.Title %>" required>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="QuestionTextField">Question</label>
-                <input type="text" class="form-control" id="QuestionTextField"
-                placeholder="Question" name="question" value="<%= surveys.Question %>"  required>
-              </div>
-
+              <input class="btn btn-primary" type="button" value="Add another text input" onClick="addInput();">
+              <br/><br/>
               <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Submit</button>
               <a href="/surveys" class="btn btn-warning"><i class="fa fa-undo"></i> Cancel</a>
               <br/><br/><br/>

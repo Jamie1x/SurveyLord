@@ -8,7 +8,7 @@ let mongoose = require('mongoose');
 let surveysSchema = mongoose.Schema({
     Title: String,
     Owner: String,
-    Question: String
+    Questions: [String]
 },
 {
   collection: "surveys"
