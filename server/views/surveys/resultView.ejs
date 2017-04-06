@@ -8,15 +8,15 @@
             <form class="form" method="post">
               <div id="form-input">
                 <div class="form-group">
-                  <label for="NameTextField">Title</label>
-                  <input type="text" class="form-control" id="NameTextField"
-                  placeholder="Survey Title" name="title" value="<%= surveys.Title %>" required>
+                  <label for="NameTextField"><%= answers.Title %></label>
                 </div>
+                <% for (let count = 0; count < answers.Questions.length; count++) { %>
                 <div class="form-group">
                   <label for="QuestionTextField">Question</label>
                   <input type="text" class="form-control" id="QuestionTextField" 
                   placeholder="Question" name="question" required>
                 </div>
+                <% } %>
               </div>
               <input class="btn btn-primary" type="button" value="Add another text input" onClick="addTextBox();">
               <br/><br/>

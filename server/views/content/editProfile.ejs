@@ -3,15 +3,15 @@
 	<main class="container">
 		<div class="row">
             <div class="col-md-offset-4 col-md-4">
-                <h1>Update Information</h1>
+                <h1>Update <%=username%>'s Information</h1>
                 <form method="post">
                     <fieldset class="form-group">
-                        <label for="email">Email: *</label>
-                        <input name="email" type="email" class="form-control" required autofocus />
+                        <label for="displayName">Display Name: *</label>
+                        <input name="displayName" type="text" class="form-control" value="<%=displayName%>" required />
                     </fieldset>
                     <fieldset class="form-group">
-                        <label for="displayName">Display Name: *</label>
-                        <input name="displayName" type="text" class="form-control" required />
+                        <label for="email">Email: *</label>
+                        <input name="email" type="email" class="form-control" value="<%=email%>" required autofocus />
                     </fieldset>
                     <fieldset class="form-group text-right">
                         <input type="submit" class="btn btn-success" value="Submit"/>

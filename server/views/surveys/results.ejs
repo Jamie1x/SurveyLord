@@ -1,0 +1,43 @@
+<% include ../partials/header.ejs %>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+          <h3><%= answers[0].Title %> Results </h3>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+              <thead>
+                <tr>
+                  <% for (let Qcount = 0; Qcount < answers[0].Questions.length; Qcount++) { %>
+                    <th class="text-center"> <%=answers[0].Questions[Qcount] %></th>
+                  <% } %>
+                <th class="text-center"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Template Row -->
+                <% for (let count = 0; count < answers.length; count++) { %>
+                <tr>
+                  <% for (let i = 0; i < answers[count].Answers.length; i++) { %>
+                    <td class="text-center"><%= answers[count].Answers[i] %></td>
+                  <% } %>
+                  <td>
+                  <a href="/view/<%= answers[count]._id %>" class="btn btn-info">
+                  <i class="fa fa-eye"></i> View Full</a>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+           <div class="col-md-offset-1 col-md-10 text-center">
+            <ul class="pagination pagination-lg pager" id="myPager"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<% include ../partials/footer.ejs %>
+
+

@@ -29,7 +29,8 @@ router.get('/', (req, res, next) => {
   res.render('content/index', {
     title: 'Home',
     surveys: '',
-    displayName: req.user ? req.user.displayName : ''
+    displayName: req.user ? req.user.displayName : '',
+    username: req.user ? req.user.username : ''
   });
 });
 
@@ -42,7 +43,8 @@ router.get('/login', (req, res, next) => {
       title: "Login",
       surveys: '',
       messages: req.flash('loginMessage'),
-      displayName: req.user ? req.user.displayName : ''
+      displayName: req.user ? req.user.displayName : '',
+      username: req.user ? req.user.username : ''
     });
     return;
   } else {
@@ -66,7 +68,8 @@ router.get('/register', (req, res, next) => {
       title: "Register",
       surveys: '',
       messages: req.flash('registerMessage'),
-      displayName: req.user ? req.user.displayName : ''
+      displayName: req.user ? req.user.displayName : '',
+      username: req.user ? req.user.username : ''
     });
     return;
   } else {
@@ -105,13 +108,19 @@ router.post('/register', (req, res, next) => {
 
 //GET /profile - render the user profile view
 router.get('/profile', requireAuth, (req, res, next) => {
-  // show the survey details view
-  res.render('content/profile', {
-    title: 'Profile',
-    surveys: '',
-    displayName: req.user ? req.user.displayName : '',
-    username: req.user ? req.user.username : '',
-    email: req.user.email
+  survey.find((err, surveys) => {
+    if (err) {
+      return console.error(err);
+    }
+    else {
+      res.render('content/profile', {
+        title: req.user.username,
+        surveys: surveys,
+        displayName: req.user ? req.user.displayName : '',
+        username: req.user ? req.user.username : '',
+        email: req.user ? req.user.email : ''
+      });
+    }
   });
 });
 
@@ -128,16 +137,15 @@ router.get('/profile/edit', requireAuth, (req, res, next) => {
 
 //POST / profile/edit - update user information
 router.post('/profile/edit', requireAuth, (req, res, next) => {
-  let id = req.params.id;
-  let username = req.params.username;
+  let userName = req.user.username;
 
   let updatedUser = new User({
-    "_id": id,
-    "username": username,
+    "_id": req.user._id,
+    "username": userName,
     "email": req.body.email,
     "displayName": req.body.displayName
   });
-  User.update({_id: id}, updatedUser, (err) => {
+  User.update({username: userName}, updatedUser, (err) => {
     if (err) {
       console.log(err);
       res.end(err);

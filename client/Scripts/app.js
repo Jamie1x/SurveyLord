@@ -105,16 +105,23 @@ $.fn.pageMe = function (opts) {
     }
 };
 
+//function to add a question to the create survey form.
 let count = 0;
-
-function addInput() {
+function addTextBox() {
     count++;
     var newdiv = document.createElement('div');
-    newdiv.innerHTML = '<div class="form-group" id="question' + count + '"><label for="QuestionTextField">Question</label> <input type="text" class="form-control" id="QuestionTextField" placeholder="Question" name="question" value=""  required><input type="button" value="Remove" onclick="RemoveTextBox(' + count + ');" /></div>';
+    newdiv.innerHTML = '<div class="form-group" id="question' + count + '">     <label for="QuestionTextField">Question</label>         <input type="text" class="form-control" id="QuestionTextField" placeholder="Question" name="question" required>      <input type="button" value="Remove" onclick="RemoveQuestion(' + count + ');" /></div>';
     document.getElementById('form-input').appendChild(newdiv);
 }
 
-function RemoveTextBox(count) {
+function addRadio() {
+    count++;
+    var newdiv = document.createElement('div');
+    newdiv.innerHTML = '<div class="form-group" id="question' + count + '">     <label for="QuestionTextField">Question</label>         <input type="text" class="form-control" id="QuestionTextField" placeholder="Question" name="question" required>     <input type="button" value="Remove" onclick="RemoveQuestion(' + count + ');" /></div>';
+    document.getElementById('form-input').appendChild(newdiv);
+}
+//remove question from form
+function RemoveQuestion(count) {
     let div = document.getElementById('question' + count);
     div.parentNode.removeChild(div);
     count--;
