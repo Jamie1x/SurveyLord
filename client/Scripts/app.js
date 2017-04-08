@@ -110,16 +110,10 @@ let count = 0;
 function addTextBox() {
     count++;
     var newdiv = document.createElement('div');
-    newdiv.innerHTML = '<div class="form-group" id="question' + count + '">     <label for="QuestionTextField">Question</label>         <input type="text" class="form-control" id="QuestionTextField" placeholder="Question" name="question" required>      <input type="button" value="Remove" onclick="RemoveQuestion(' + count + ');" /></div>';
+    newdiv.innerHTML = '<div class="form-group" id="question' + count + '">     <label for="QuestionTextField">Question</label>         <div class="input-group"><input type="text" class="form-control" id="QuestionTextField" placeholder="Question" name="question" required>      <span class="input-group-btn"><button class="btn btn-danger" onclick="RemoveQuestion(' + count + ');"><i class="fa fa-times"></i></button></span></div></div>';
     document.getElementById('form-input').appendChild(newdiv);
 }
 
-function addRadio() {
-    count++;
-    var newdiv = document.createElement('div');
-    newdiv.innerHTML = '<div class="form-group" id="question' + count + '">     <label for="QuestionTextField">Question</label>         <input type="text" class="form-control" id="QuestionTextField" placeholder="Question" name="question" required>     <input type="button" value="Remove" onclick="RemoveQuestion(' + count + ');" /></div>';
-    document.getElementById('form-input').appendChild(newdiv);
-}
 //remove question from form
 function RemoveQuestion(count) {
     let div = document.getElementById('question' + count);

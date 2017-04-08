@@ -8,6 +8,8 @@ let mongoose = require('mongoose');
 let surveysSchema = mongoose.Schema({
     Title: String,
     Owner: String,
+    Start: Date,
+    Finish: Date,
     Questions: [String]
 },
 {

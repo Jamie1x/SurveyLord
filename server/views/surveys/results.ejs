@@ -4,6 +4,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-offset-1 col-md-10">
+        <% if(answers[0]) { %>
           <h3><%= answers[0].Title %> Results </h3>
           <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
@@ -23,7 +24,7 @@
                     <td class="text-center"><%= answers[count].Answers[i] %></td>
                   <% } %>
                   <td>
-                  <a href="/view/<%= answers[count]._id %>" class="btn btn-info">
+                  <a href="/<%= surveyid %>/results/<%= answers[count]._id %>" class="btn btn-info">
                   <i class="fa fa-eye"></i> View Full</a>
                   </td>
                 </tr>
@@ -34,6 +35,13 @@
            <div class="col-md-offset-1 col-md-10 text-center">
             <ul class="pagination pagination-lg pager" id="myPager"></ul>
           </div>
+          <% } else { %>
+            <h1>No Results </h1>
+            <br/><br/>
+            <h3> Noone has taken your survey yet</h3>
+            <h3> Try again soon</h3>
+            <br/><br/>
+            <% } %>
         </div>
       </div>
     </div>

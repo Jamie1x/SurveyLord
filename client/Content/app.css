@@ -8,6 +8,10 @@ body {
   background-color:#cccccc;
 }
 
+.button {
+    float: right;
+}
+
 .navbar-default {
   background: #ff0000;
   border-color: #6b6b6b;

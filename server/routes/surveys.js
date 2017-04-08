@@ -14,6 +14,8 @@ let answer = require('../models/answers');
 let UserModel = require('../models/users');
 let User = UserModel.User; // alias for User Model - User object
 
+let date = new Date();
+
 // create a function to check if the user is authenticated
 function requireAuth(req, res, next) {
   // check if the user is logged in
@@ -34,6 +36,7 @@ router.get('/', (req, res, next) => {
       res.render('surveys/index', {
         title: 'Surveys',
         surveys: surveys,
+        date: date,
         displayName: req.user ? req.user.displayName : '',
         username: req.user ? req.user.username : ''
       });
@@ -56,6 +59,8 @@ router.post('/add', requireAuth, (req, res, next) => {
   let newSurvey = survey({
     "Title": req.body.title,
     "Owner": req.user.username,
+    "Start": req.body.start,
+    "Finish": req.body.finish,
     "Questions": req.body.question
   });
 
@@ -106,6 +111,7 @@ router.post('/:id', (req, res, next) => {
         res.end(error);
       } else {
         let newAnswer = answer({
+          "SurveyID": id,
           "Title": surveys.Title,
           "Owner": surveys.Owner,
           "Questions": surveys.Questions,
@@ -131,9 +137,9 @@ router.post('/:id', (req, res, next) => {
 router.get('/:id/results', requireAuth, (req, res, next) => {
   try {
     // get a reference to the id from the url
-    //let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
+    let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
 
-    answer.find({ Owner: req.user.username }, (err, answers) => {
+    answer.find({SurveyID: id}, (err, answers) => {
       if (err) {
         console.log(err);
         res.end(error);
@@ -141,6 +147,7 @@ router.get('/:id/results', requireAuth, (req, res, next) => {
         // show the survey details view
         res.render('surveys/results', {
           title: 'Answers',
+          surveyid: id,
           answers: answers,
           displayName: req.user ? req.user.displayName : '',
           username: req.user ? req.user.username : ''
@@ -153,18 +160,19 @@ router.get('/:id/results', requireAuth, (req, res, next) => {
   }
 });
 
-router.get('/view/:id', requireAuth, (req, res, next) => {
+router.get('/:id/results/:answerid', requireAuth, (req, res, next) => {
   try {
     // get a reference to the id from the url
     let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
+    let answerid = mongoose.Types.ObjectId.createFromHexString(req.params.answerid);
 
-    answer.findById(id, (err, answers) => {
+    answer.findById(answerid, (err, answers) => {
       if (err) {
         console.log(err);
         res.end(error);
       } else {
         // show the survey details view
-        res.render('surveys/resultView', {
+        res.render('surveys/view', {
           title: 'Full Results',
           answers: answers,
           displayName: req.user ? req.user.displayName : '',

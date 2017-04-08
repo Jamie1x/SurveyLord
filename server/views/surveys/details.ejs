@@ -8,12 +8,19 @@
             <form class="form" method="post">
               <div id="form-input">
                 <div class="form-group">
-                  <label for="NameTextField">Title</label>
-                  <input type="text" class="form-control" id="NameTextField"
-                  placeholder="Survey Title" name="title" value="<%= surveys.Title %>" required>
+                  <label for="NameTextField">Title:</label>
+                  <input type="text" class="form-control" id="TitleTextField"
+                  placeholder="Survey Title" name="title" value="<%= surveys.Title %>" required autofocus>
+                </div>
+                <div>
+                  <label for="NameTextField">Start Date:</label>
+                  <input type="date" class="form-control-static" id="StartDate" name="start" required>
+                  <label for="NameTextField">Close Date:</label>
+                  <input type="date" class="form-control-static" id="FinishDate" name="finish" required>
+                  </br></br></br>
                 </div>
                 <div class="form-group">
-                  <label for="QuestionTextField">Question</label>
+                  <label for="QuestionTextField">Question:</label>
                   <input type="text" class="form-control" id="QuestionTextField" 
                   placeholder="Question" name="question" required>
                 </div>
