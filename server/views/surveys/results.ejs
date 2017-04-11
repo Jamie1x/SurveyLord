@@ -24,7 +24,7 @@
                     <td class="text-center"><%= answers[count].Answers[i] %></td>
                   <% } %>
                   <td>
-                  <a href="/<%= surveyid %>/results/<%= answers[count]._id %>" class="btn btn-info">
+                  <a href="/surveys/<%= answers[count].SurveyID %>/results/<%= answers[count]._id %>" class="btn btn-info">
                   <i class="fa fa-eye"></i> View Full</a>
                   </td>
                 </tr>
@@ -38,8 +38,8 @@
           <% } else { %>
             <h1>No Results </h1>
             <br/><br/>
-            <h3> Noone has taken your survey yet</h3>
-            <h3> Try again soon</h3>
+            <h3> No one has taken your survey yet</h3>
+            <h3> Check again later</h3>
             <br/><br/>
             <% } %>
         </div>

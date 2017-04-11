@@ -4,23 +4,19 @@
     <div class="container">
       <div class="row">
         <div class="col-md-offset-3 col-md-6">
-          <h1><%= title %></h1>
+          <h1><%= answers.Title %></h1>
             <form class="form" method="post">
               <div id="form-input">
-                <div class="form-group">
-                  <label for="NameTextField"><%= answers.Title %></label>
-                </div>
                 <% for (let count = 0; count < answers.Questions.length; count++) { %>
                 <div class="form-group">
-                  <label for="QuestionTextField">Question</label>
+                  <label for="QuestionTextField"><%= answers.Questions[count] %></label>
                   <input type="text" class="form-control" id="QuestionTextField" 
-                  placeholder="Question" name="question" required>
+                  value="<%= answers.Answers[count] %>" name="question" disabled>
                 </div>
                 <% } %>
               </div>
               <br/><br/>
-              <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Submit</button>
-              <a href="/surveys" class="btn btn-warning"><i class="fa fa-undo"></i> Cancel</a>
+              <a href="/surveys/<%= answers.SurveyID %>/results" class="btn btn-primary"><i class="fa fa-undo"></i> Back</a>
               <br/><br/><br/>
             </form>
         </div>
