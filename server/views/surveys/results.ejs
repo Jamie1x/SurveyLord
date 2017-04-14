@@ -24,15 +24,15 @@
                     <td class="text-center"><%= answers[count].Answers[i] %></td>
                   <% } %>
                   <td>
-                  <a href="/surveys/<%= answers[count].SurveyID %>/results/<%= answers[count]._id %>" class="btn btn-info">
-                  <i class="fa fa-eye"></i> View Full</a>
+                    <a href="/surveys/<%= answers[count].SurveyID %>/results/<%= answers[count]._id %>" class="btn btn-info">
+                    <i class="fa fa-eye"></i> View Full</a>
                   </td>
                 </tr>
                 <% } %>
               </tbody>
             </table>
           </div>
-           <div class="col-md-offset-1 col-md-10 text-center">
+          <div class="col-md-offset-1 col-md-10 text-center">
             <ul class="pagination pagination-lg pager" id="myPager"></ul>
           </div>
           <% } else { %>

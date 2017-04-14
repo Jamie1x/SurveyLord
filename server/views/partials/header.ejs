@@ -13,7 +13,7 @@
   </head>
   <body>
 
-  <nav id="custom-bootstrap-menu" class="navbar navbar-default navbar-static-top" role="navigation">
+  <nav id="custom-bootstrap-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -29,24 +29,29 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <% if(typeof displayName == 'string' && displayName) { %>
-          <li class="navbar-text"><i class="fa fa-user"></i> Welcome, <%= displayName %></li>
-        <% } %>
+
         <% if(title == "Home") { %>
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="/surveys"> Surveys</a></li>
+            <li class="active"><a href="/"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="/surveys"><i class="fa fa-inbox"></i> Surveys</a></li>
+            <li><a href="/surveys/add"><i class="fa fa-plus"></i> Create a Survey</a></li>
         <% } else if(title == "Surveys") {%>
-            <li><a href="/">Home</a></li>
-            <li class="active"><a href="/surveys"> Surveys</a></li>
+            <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+            <li class="active"><a href="/surveys"><i class="fa fa-inbox"></i> Surveys</a></li>
+            <li><a href="/surveys/add"><i class="fa fa-plus"></i> Create a Survey</a></li>
+        <% } else if(title == "Add a new survey") {%>
+            <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="/surveys"><i class="fa fa-inbox"></i> Surveys</a></li>
+            <li class="active"><a href="/surveys/add"><i class="fa fa-plus"></i> Create a Survey</a></li>
         <% } else {%>
-            <li><a href="/">Home</a></li>
-            <li><a href="/surveys"> Surveys</a></li>
+            <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="/surveys"><i class="fa fa-inbox"></i> Surveys</a></li>
+            <li><a href="/surveys/add"><i class="fa fa-plus"></i> Create a Survey</a></li>
         <% }%>
         <% if(typeof displayName == 'string' && displayName) { %>
           <% if(title == username) { %>
-            <li class="active"><a href="/profile"><i class="fa fa-user"></i> Profile </a></li>
+            <li class="active"><a href="/profile"><i class="fa fa-user"></i> <%= displayName %> </a></li>
           <% } else { %>
-            <li><a href="/profile"><i class="fa fa-user"></i> Profile </a></li>
+            <li><a href="/profile"><i class="fa fa-user"></i> <%= displayName %> </a></li>
           <% } %>
         <% } else { %>
           <% if(title == "Login") {%>
@@ -60,3 +65,4 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+</br></br></br>
