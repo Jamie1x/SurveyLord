@@ -1,5 +1,5 @@
-# Survey Maker
+# Survey Lord
 
-## Final project for COMP308
+## By: Jamie Kennedy
 
-### By: Jamie Kennedy
+### Survey creation website using HTML, CSS, JavaScript and JQuery. Online database hosted on mlab.

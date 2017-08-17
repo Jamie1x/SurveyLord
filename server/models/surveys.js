@@ -1,6 +1,5 @@
 //surveys.js (database model)
-//Jamie Kennedy - 300753196
-//COMP308-W2017-Final
+//Jamie Kennedy
 
 let mongoose = require('mongoose');
 
